@@ -133,6 +133,8 @@ and open the template in the editor.
                     </tr>
                 </tbody>
             </table>
+            <br />
+
         </div>
     </body>
 </html>

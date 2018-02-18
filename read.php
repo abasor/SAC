@@ -88,5 +88,11 @@ function avancePlanAnttiguo($id){
             . " from planAntiguo"
             . " where rut=$id";
     $resultado = $coneccion->query($consulta);
+    $fila = $resultado->fetch_object();
+    $salida = "<table>";
+    while($fila){
+        $salida = $salida . "<tr><td></td></tr>";
+    }
+    $salida = $salida . "</table>";
     return $resultado;
 }        
