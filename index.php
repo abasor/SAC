@@ -26,19 +26,19 @@ and open the template in the editor.
                     </tr>
                     <tr>
                         <td>NOMBRES</td>
-                        <td><?php echo $datos[0]; ?></td>
+                        <td><?php echo $datos["nombres"]; ?></td>
                     </tr>
                     <tr>
                         <td>APELLIDOS</td>
-                        <td><?php echo $datos[1];?></td>
+                        <td><?php echo $datos["apellidos"];?></td>
                     </tr>
                     <tr>
                         <td>CARRERA</td>
-                        <td><?php echo $datos[2];?></td>
+                        <td><?php echo $datos["carrera"];?></td>
                     </tr>
                     <tr>
                         <td>PLAN</td>
-                        <td><?php echo $datos[3];?></td>
+                        <td><?php echo $datos["plan"];?></td>
                     </tr>
                 </tbody>
             </table>
@@ -47,7 +47,7 @@ and open the template in the editor.
                 <tbody>
                     <tr>
                         <td>GRATUIDAD</td>
-                        <td><?php echo $datos[4];?></td>
+                        <td><?php echo $datos["gratuidad"];?></td>
                     </tr>
                 </tbody>
             </table>
@@ -56,7 +56,7 @@ and open the template in the editor.
                 <tbody>
                     <tr>
                         <td>TIEMPO EN PLAN ACTUAL</td>
-                        <td><?php echo $datos[5];?> años</td>
+                        <td><?php echo $datos["tiempoPlanActual"];?> años</td>
                     </tr>
                     <tr>
                         <td>TIEMPO EN REDISEÑO</td>
@@ -64,19 +64,19 @@ and open the template in the editor.
                     </tr>
                     <tr>
                         <td>ASIG 1 A 6 SEM PLAN ACTUAL</td>
-                        <td><?php echo $datos[6];?></td>
+                        <td><?php echo $datos["a1a6"];?></td>
                     </tr>
                     <tr>
                         <td>ASIG 7 A 12 SEM PLAN ACTUAL</td>
-                        <td><?php echo $datos[7];?></td>
+                        <td><?php echo $datos["a7a12"];?></td>
                     </tr>
                     <tr>
                         <td>CUARTA OPORTUNIDAD UTILIZADA</td>
-                        <td><?php echo $datos[8];?></td>
+                        <td><?php echo $datos["utilizoCuarta"];?></td>
                     </tr>
                     <tr>
                         <td>ASIG 4TA OPORT 2DO SEM 2017</td>
-                        <td><?php echo $datos[9];?></td>
+                        <td><?php echo $datos["segSemCuarta"];?></td>
                     </tr>
                 </tbody>
             </table>
@@ -122,9 +122,9 @@ and open the template in the editor.
                         <td>RECOMENDACION</td>
                         <td>
                             <?php
-                                if($datos[10]==-1){
+                                if($datos["condicion"]==-1){
                                     echo "Mantener plan";
-                                } elseif($datos[10]==1) {
+                                } elseif($datos["condicion"]==1) {
                                     echo "Traslado";
                                 }else{
                                     echo "Libre elección";
@@ -135,7 +135,9 @@ and open the template in the editor.
                 </tbody>
             </table>
             <br />
-
+            <?php 
+                avancePlanAntiguo($rut);
+            ?>
         </div>
     </body>
 </html>
