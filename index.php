@@ -10,6 +10,7 @@ and open the template in the editor.
         <title></title>
     </head>
     <body>
+        <h1> hola jhanndy </h1>
         <?php
         // put your code here
         $rut = 17019107;
