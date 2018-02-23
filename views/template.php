@@ -7,7 +7,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>SISAC| Starter</title>
+  <title>SISAC|UA</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <link rel="stylesheet" href="views/bower_components/bootstrap/dist/css/bootstrap.min.css">
@@ -298,87 +298,315 @@ desired effect
       <!--------------------------
         | Your Page Content Here |
         -------------------------->
+         <?php
+        // put your code here
+        $rut = 14684771;
+        include('read.php');
+        $datos = getIndicadores($rut);
+        ?>
          <div class="row">
-            <div class="col-md-8">
-                <div class="box box-info">
-                    <div class="box-header with-border">
-                        <h3 class="box-title">IDENTIFICACION-ESTUDIANTE-CARRERA-PLAN</h3>
-                        
-                        </h4>
-                    </div>
-                 
-                </div>
+            <div class="col-md-6">
+                <!-- Profile Image -->
+        <div class="box box-primary">
+          <div class="box-body box-profile">
+            <img class="profile-user-img img-responsive img-circle" src="views/dist/img/alumno.png" alt="User profile picture">
+
+            <h3 class="profile-username text-center"><?php echo $datos["apellidos"]; ?></h3>
+
+            <p class="text-muted text-center"><?php echo $datos["nombres"];?> </p>
+
+            <ul class="list-group list-group-unbordered">
+              <li class="list-group-item">
+                <b>RUT</b> <a class="pull-right"><?php echo $rut; ?></a>
+              </li>
+              <li class="list-group-item">
+                <b>CARRERA</b> <a class="pull-right"><?php echo $datos["carrera"];?></a>
+              </li>
+              <li class="list-group-item">
+                <b>PLAN</b> <a class="pull-right"><?php echo $datos["plan"];?></a>
+              </li>
+            </ul>
+
+          </div>
+          <!-- /.box-body -->
+        </div>
               
             </div>
-            <div class="col-md-4">
-                <div class="box box-info">
-                    <div class="box-header with-border">
-                        <h4 class="box-title">GRATUIDAD = SI/NO</h4>
-                    </div>
-                    
-                </div>
+              
+            <div class="col-md-3">
+                 <!-- /.info-box -->
+            <div class="info-box bg-blue">
+              <span class="info-box-icon"><i class="ion-social-usd-outline"></i></span>
+
+              <div class="info-box-content">
+                <span class="info-box-text">GRATUIDAD</span>
+                <span class="info-box-number">
+                  <?php // Empieza el código php
+                      $gratuidad = $datos["gratuidad"];
+                      if ($gratuidad=="SI") {  // Si tiene gratuidad
+                          echo("SI"); 
+                  ?>
+                      <div class="progress">
+                          <div class="progress-bar" style="width: 100%"></div>
+                      </div>
+                      <span class="progress-description">
+                            100% Otorgado
+                      </span>
+                  <?php
+                      }else {
+                          echo("NO"); // 0% de gratuidad
+                  ?> 
+                      <div class="progress">
+                          <div class="progress-bar" style="width: 0%"></div>
+                      </div>
+                      <span class="progress-description">
+                              0% No posee
+                      </span>
+                  <?php
+                      }
+                  ?>
+                </span>
+             </div>
+              <!-- /.info-box-content -->
+             
+          </div>
+          <!-- /.info-box -->
                 
             </div>
-           
-        </div>
+             <div class="col-md-3">
+                 <!-- /.info-box -->
+            <div class="info-box bg-blue">
+              <span class="info-box-icon">%</span>
+
+              <div class="info-box-content">
+                <span class="info-box-text">AVANCE</span>
+                <span class="info-box-number">
+                    <?php 
+                        $cantPlan = cantAsigPlan($rut);
+                        if($cantPlan==0)
+                        {
+                            echo 0;
+                    ?>
+                            <div class="progress">
+                                 <div class="progress-bar" style="width: 0%"></div>
+                             </div>
+                             <span class="progress-description">
+                                   0% PROGRESO
+                             </span>
+                  <?php
+                       }else{
+                           $avance=$cantAsig/$cantPlan*100;
+                            echo $avance;
+                        ?> 
+                            <div class="progress">
+                                <?php
+                                if ($avance > 0 and $avance <= 30)
+                                {
+                                ?>
+                                  <div class="progress-bar" style="width: 30%"></div>
+                                <?php
+                                }elseif ($avance > 30 and $avance <= 60) 
+                                {?>
+                                   <div class="progress-bar" style="width: 60%"></div>
+                                <?php
+                                }elseif ($avance > 60 and $avance <= 99) 
+                                {?>
+                                   <div class="progress-bar" style="width: 90%"></div>
+                                <?php
+                                }
+                                 ?>
+                            </div>
+                    <?php
+                  }
+                  ?> 
+                </span>
+
+              </div>
+              <!-- /.info-box-content -->
+             
+          </div>
+          <!-- /.info-box -->
+                
+            </div>
+              
+             <div class="col-md-3">
+                
+                    <!-- small box -->
+                    <div class="small-box bg-blue">
+                      <div class="inner">
+                        <h3><?php echo $datos["tiempoPlanActual"];?> años</h3>
+                        <p>TIEMPO EN PLAN ACTUAL</p>
+                      </div>
+                      <div class="icon">
+                        <i class="ion ion-clock"></i>
+                      </div>
+                    </div>
+            </div>
+          
+            <div class="col-md-3">
+               <!-- small box -->
+                    <div class="small-box bg-blue">
+                      <div class="inner">
+                        <h3><?php echo cantSemPlanNuevo($rut)/5;?></h3>
+                        <p>TIEMPO EN REDISEÑO</p>
+                      </div>
+                      <div class="icon">
+                        <i class="ion ion-clock"></i>
+                      </div>
+                    </div>
+            </div>
+             <div class="col-md-3">
+                
+                    <!-- small box -->
+                    <div class="small-box bg-blue">
+                      <div class="inner">
+                        <h3> <?php
+                                $cantAsig = cantAsigAprobadas($rut);
+                                echo $cantAsig;
+                            ?></h3>
+                        <p>TOTAL ASIGNATURAS APROBADAS</p>
+                      </div>
+                      <div class="icon">
+                        <i class="ion ion-connection-bars"></i>
+                      </div>
+                    </div>
+            </div>
+          
+            <div class="col-md-3">
+               <!-- small box -->
+                    <div class="small-box bg-blue">
+                      <div class="inner">
+                        <h3><?php
+                                $cantPlan = cantAsigPlan($rut);
+                                echo $cantPlan;
+                            ?></h3>
+                        <p>TOTAL ASIGNATURAS PLAN</p>
+                      </div>
+                      <div class="icon">
+                        <i class="ion ion-connection-bars"></i>
+                      </div>
+                    </div>
+            </div>
+        </div> <!-- ./row -->
         
         <div class="row">
-            <div class="col-md-8">
-                <div class="box box-success">
-                    <div class="box-header with-border">
-                        <h3 class="box-title">Malla carrera</h3>
-                        <h4 style="background-color:#f7f7f7; font-size: 18px; text-align: center; padding: 7px 10px; margin-top: 0;">
-                            MALLA CON AVANCE CURRICULAR
-                        <h4 style="background-color:#f7f7f7; font-size: 18px; text-align: center; padding: 7px 10px; margin-top: 0;">
-                            PLAN ACTUAL (EN OTRA SE DEBE MOSTRAR REDISEÑO)
-                            <h4 style="background-color:#f7f7f7; font-size: 18px; text-align: center; padding: 7px 10px; margin-top: 0;">
-                            PUEDE SER TABLA POR NIVEL O CON CAJITAS
-                    </div>
-                </div>
+            <div class="col-md-3 col-sm-6 col-xs-12">
+          <div class="info-box">
+            <span class="info-box-icon bg-blue"><i class="fa fa-battery-half"></i></span>
+
+            <div class="info-box-content">
+              <span class="info-box-text">NUMERO DE ASIG 1 A 6</span>
+              <span class="info-box-text">SEM PLAN ACTUAL</span>
+              <span class="info-box-number"><?php echo $datos["a1a6"];?></span>
             </div>
-            <div class="col-md-2">
-                <div class="box box-success">
-                    <div class="box-header with-border">
-                        <h4 class="box-title">TIEMPO EN PLAN ACTUAL</h4>
-                    </div>
-                </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+        </div>
+        <!-- /.col -->
+        <div class="col-md-3 col-sm-6 col-xs-12">
+          <div class="info-box">
+            <span class="info-box-icon bg-blue"><i class="fa fa-battery-three-quarters"></i></span>
+
+            <div class="info-box-content">
+              <span class="info-box-text">NUMERO DE ASIG 7 A 12</span>
+              <span class="info-box-text">SEM PLAN ACTUAL</span>
+              <span class="info-box-number"><?php echo $datos["a7a12"];?></span>
             </div>
-            <div class="col-md-2">
-                <div class="box box-success">
-                    <div class="box-header with-border">
-                        <h4 class="box-title">TIEMPO EN REDISEÑO</h4>
-                    </div>
-                </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+        </div>
+        <!-- /.col -->
+        <div class="col-md-3 col-sm-6 col-xs-12">
+          <div class="info-box">
+            <span class="info-box-icon bg-yellow"><i class="fa fa-check-square"></i></span>
+
+            <div class="info-box-content">
+              <span class="info-box-text">CUARTA OPORTUNIDAD</span>
+              <span class="info-box-text">UTILIZADA</span>
+              <span class="info-box-number"><?php echo $datos["utilizoCuarta"];?></span>
             </div>
+            <!-- /.info-box-content -->
+          </div>
+        </div>
+        <!-- /.col -->
+        <div class="col-md-3 col-sm-6 col-xs-12">
+          <div class="info-box">
+            <span class="info-box-icon bg-yellow"><i class="fa fa-check-square-o"></i></span>
+
+            <div class="info-box-content">
+              <span class="info-box-text">ASIG. 4ta OPORTUNIDAD</span>
+              <span class="info-box-text">2do SEM 2017</span>
+              <span class="info-box-number"><?php echo $datos["segSemCuarta"];?></span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+        </div>
+        <!-- /.col -->
+        </div>
+        
        
-            <div class="col-md-2">
-                <div class="box box-success">
-                    <div class="box-header with-border">
-                        <h4 class="box-title">NUMERO DE ASIG 1 A 6 SEM PLAN ACTUAL</h4>
-                    </div>
-                </div>
+        
+        <div class="row">
+            <section class="col-md-12 connectedSortable">
+          <!-- Custom tabs (Charts with tabs)-->
+          <div class="nav-tabs-custom">
+            <!-- Tabs within a box -->
+            <ul class="nav nav-tabs pull-right">
+              <li class="active"><a href="#revenue-chart" data-toggle="tab" aria-expanded="TRUE">PLAN ACTUAL</a></li>
+              <li><a href="#sales-chart" data-toggle="tab" aria-expanded="false">REDISEÑO</a></li>
+              <li class="pull-left header"><i class="fa fa-inbox"></i> Malla Carrera</li>
+            </ul>
+            <div class="tab-content no-padding">
+              <!-- Morris chart - Sales -->
+              <div class="chart tab-pane active" id="revenue-chart" style="position: relative; height: 500px;"> 
+                  <div class="row">
+                      <div class="col-md-1">
+                          <div class="box box-warning" style="font-size: 12px;">introduccion asig1</div>
+                          <div class="box box-warning">introduccion asig2</div>
+                          <div class="box box-warning">introduccion asig3</div>
+
+                      </div>
+                      <div class="col-md-1">
+                          <div class="box box-warning">introduccion asig4</div>
+                          <div class="box box-warning">introduccion asig5</div>
+                          <div class="box box-warning">introduccion asig6</div>
+
+                      </div>
+                       <div class="col-md-1">
+                          <div class="box box-warning">introduccion asig4</div>
+                          <div class="box box-warning">introduccion asig5</div>
+                          <div class="box box-warning">introduccion asig6</div>
+
+                      </div>
+                       <div class="col-md-1">
+                          <div class="box box-warning">introduccion asig4</div>
+                          <div class="box box-warning">introduccion asig5</div>
+                          <div class="box box-warning">introduccion asig6</div>
+
+                      </div>
+                       <div class="col-md-1">
+                          <div class="box box-warning">introduccion asig4</div>
+                          <div class="box box-warning">introduccion asig5</div>
+                          <div class="box box-warning">introduccion asig6</div>
+
+                      </div>
+                  </div> <!-- /.row -->
+                  <span class="info-box-text">NUMERO DE ASIG 1 A 6</span>
+                    <span class="info-box-text">SEM PLAN ACTUAL</span>
+                    <span class="info-box-number"><?php echo $datos["a1a6"];?></span>
+              </div>
+              <div class="chart tab-pane" id="sales-chart" style="position: relative; height: 300px;">
+                  <span class="info-box-text">NUMERO DE ASIG 7 A 12</span>
+                    <span class="info-box-text">SEM PLAN ACTUAL</span>
+                    <span class="info-box-number"><?php echo $datos["a7a12"];?></span>
+              </div>
             </div>
-            <div class="col-md-2">
-                <div class="box box-success">
-                    <div class="box-header with-border">
-                        <h4 class="box-title">NUMERO DE ASIG 7 A 12 SEM PLAN ACTUAL</h4>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-2">
-                <div class="box box-success">
-                    <div class="box-header with-border">
-                        <h4 class="box-title">CUARTA OPORTUNIDAD UTIIZADA</h4>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-2">
-                <div class="box box-success">
-                    <div class="box-header with-border">
-                        <h4 class="box-title">ASIGNATURA EN CUARTA OPORTUNIDAD 2SEM 2017 SI/NO</h4>
-                    </div>
-                </div>
-            </div>
+          </div>
+          <!-- /.nav-tabs-custom -->
+            
         </div>
 
     </section>
