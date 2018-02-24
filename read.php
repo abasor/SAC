@@ -113,4 +113,121 @@ function avancePlanAntiguo($id){
     }
     echo "</table>";
     //return $resultado;
-}        
+}
+
+function avancePlanAntiguo2($id){
+    include('conection.php');
+    /*$consulta = "select carrera"
+            . ",nivel"
+            . ",codigoAsignatura"
+            . ",nombreAsignatura"
+            . ",if(asigAprobadas=1,'Aprobada','No aprobada') as Aprobacion"
+            . " from planAntiguo"
+            . " where rut=$id"
+            . " order by carrera asc, nivel asc, codigoAsignatura asc";
+    $cons = "select distinct pa1.nivel,"
+            . "(select count(*) from dbsac.planAntiguo as pa2 where pa2.nivel = pa1.nivel and pa2.rut = pa1.rut) as cant"
+            . "from dbsac.planantiguo as pa1"
+            . "where pa1.rut = $id";
+    $con2 = "select max(pa3.cant) as maxAsigs"
+            . "from ("
+            . "     select distinct pa1.nivel, ("
+            . "         select count(*) "
+            . "         from dbsac.planAntiguo as pa2 "
+            . "         where pa2.nivel = pa1.nivel "
+            . "         and pa2.rut = pa1.rut"
+            . "     ) as cant"
+            . "     from dbsac.planantiguo as pa1"
+            . "     where pa1.rut = $id "
+            . ") as pa3";
+    $res = $coneccion->query($cons);
+    $tmp = $res->fetch_array(MYSQLI_BOTH);
+    $niveles = count($tmp);
+    
+    $res = $coneccion->query($con2);
+    $tmp = $res->fetch_array(MYSQLI_BOTH);
+    $maxAsig = $tmp["maxAsigs"];*/
+    $sem1Query = "select nivel,codigoAsignatura,asigAprobadas from dbsac.planAntiguo where rut = 17019107 and nivel=1 order by codigoAsignatura asc";
+    $sem2Query = "select nivel,codigoAsignatura,asigAprobadas from dbsac.planAntiguo where rut = 17019107 and nivel=2 order by codigoAsignatura asc";
+    $sem3Query = "select nivel,codigoAsignatura,asigAprobadas from dbsac.planAntiguo where rut = 17019107 and nivel=3 order by codigoAsignatura asc";
+    $sem4Query = "select nivel,codigoAsignatura,asigAprobadas from dbsac.planAntiguo where rut = 17019107 and nivel=4 order by codigoAsignatura asc";
+    $sem5Query = "select nivel,codigoAsignatura,asigAprobadas from dbsac.planAntiguo where rut = 17019107 and nivel=5 order by codigoAsignatura asc";
+    $sem6Query = "select nivel,codigoAsignatura,asigAprobadas from dbsac.planAntiguo where rut = 17019107 and nivel=6 order by codigoAsignatura asc";
+    $sem7Query = "select nivel,codigoAsignatura,asigAprobadas from dbsac.planAntiguo where rut = 17019107 and nivel=7 order by codigoAsignatura asc";
+    $sem8Query = "select nivel,codigoAsignatura,asigAprobadas from dbsac.planAntiguo where rut = 17019107 and nivel=8 order by codigoAsignatura asc";
+    $sem9Query = "select nivel,codigoAsignatura,asigAprobadas from dbsac.planAntiguo where rut = 17019107 and nivel=9 order by codigoAsignatura asc";
+    $semAQuery = "select nivel,codigoAsignatura,asigAprobadas from dbsac.planAntiguo where rut = 17019107 and nivel=10 order by codigoAsignatura asc";
+    $semBQuery = "select nivel,codigoAsignatura,asigAprobadas from dbsac.planAntiguo where rut = 17019107 and nivel=11 order by codigoAsignatura asc";
+    $semCQuery = "select nivel,codigoAsignatura,asigAprobadas from dbsac.planAntiguo where rut = 17019107 and nivel=12 order by codigoAsignatura asc";
+    
+    $sem1Data = $coneccion->query($sem1Query);
+    $sem2Data = $coneccion->query($sem2Query);
+    $sem3Data = $coneccion->query($sem3Query);
+    $sem4Data = $coneccion->query($sem4Query);
+    $sem5Data = $coneccion->query($sem5Query);
+    $sem6Data = $coneccion->query($sem6Query);
+    $sem7Data = $coneccion->query($sem7Query);
+    $sem8Data = $coneccion->query($sem8Query);
+    $sem9Data = $coneccion->query($sem9Query);
+    $semAData = $coneccion->query($semAQuery);
+    $semBData = $coneccion->query($semBQuery);
+    $semCData = $coneccion->query($semCQuery);
+    
+    /*$arrSem1 = array();
+    $arrSem2 = array();
+    $arrSem3 = array();
+    $arrSem4 = array();
+    $arrSem5 = array();
+    $arrSem6 = array();
+    $arrSem7 = array();
+    $arrSem8 = array();
+    $arrSem9 = array();
+    $arrSemA = array();
+    $arrSemB = array();
+    $arrSemC = array();*/
+    
+    for($i = 0; $i < 12; $i++){
+        for($j = 0; $j < 3; $j++){
+            
+        }
+    }
+}
+
+function avancePlanAntiguo3($id){
+    include('conection.php');
+    echo "<table>";
+    echo "<tr>";
+        echo "<td>" . datosSemestre($id, 1) . "</td>";
+        echo "<td>" . datosSemestre($id, 2) . "</td>";
+        echo "<td>" . datosSemestre($id, 3) . "</td>";
+        echo "<td>" . datosSemestre($id, 4) . "</td>";
+        echo "<td>" . datosSemestre($id, 5) . "</td>";
+        echo "<td>" . datosSemestre($id, 6) . "</td>";
+        echo "<td>" . datosSemestre($id, 7) . "</td>";
+        echo "<td>" . datosSemestre($id, 8) . "</td>";
+        echo "<td>" . datosSemestre($id, 9) . "</td>";
+        echo "<td>" . datosSemestre($id, 10) . "</td>";
+        echo "<td>" . datosSemestre($id, 11) . "</td>";
+        echo "<td>" . datosSemestre($id, 12) . "</td>";
+    echo "</tr>";
+    echo "</table>";
+}
+
+function datosSemestre($id,$nivel){
+    include('conection.php');
+    $con = "select carrera,nivel,codigoAsignatura,nombreAsignatura,asigAprobadas "
+            . "from dbsac.planAntiguo "
+            . "where rut=$id and nivel=$nivel "
+            . "order by carrera asc, nivel asc, codigoAsignatura asc";
+    $res = $coneccion->query($con);
+    echo "<table>";
+    echo "<tr><td>";
+        while($f = $res->fetch_array(MYSQLI_BOTH)){
+            echo $f['nombreAsignatura'] . "<BR />" . $f['codigoAsignatura'];
+        }
+    echo "</td></tr>";
+    echo "</table>";
+}
+
+
+
