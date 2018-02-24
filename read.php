@@ -90,6 +90,10 @@ function cantAsigPlan($id){
 }
 
 function avancePlanAntiguo($id){
+    avancePlanAntiguo2($id);
+}
+
+function avancePlanAntiguo1($id){
     include('conection.php');
     $consulta = "select carrera"
             . ",nivel"
@@ -116,84 +120,6 @@ function avancePlanAntiguo($id){
 }
 
 function avancePlanAntiguo2($id){
-    include('conection.php');
-    /*$consulta = "select carrera"
-            . ",nivel"
-            . ",codigoAsignatura"
-            . ",nombreAsignatura"
-            . ",if(asigAprobadas=1,'Aprobada','No aprobada') as Aprobacion"
-            . " from planAntiguo"
-            . " where rut=$id"
-            . " order by carrera asc, nivel asc, codigoAsignatura asc";
-    $cons = "select distinct pa1.nivel,"
-            . "(select count(*) from dbsac.planAntiguo as pa2 where pa2.nivel = pa1.nivel and pa2.rut = pa1.rut) as cant"
-            . "from dbsac.planantiguo as pa1"
-            . "where pa1.rut = $id";
-    $con2 = "select max(pa3.cant) as maxAsigs"
-            . "from ("
-            . "     select distinct pa1.nivel, ("
-            . "         select count(*) "
-            . "         from dbsac.planAntiguo as pa2 "
-            . "         where pa2.nivel = pa1.nivel "
-            . "         and pa2.rut = pa1.rut"
-            . "     ) as cant"
-            . "     from dbsac.planantiguo as pa1"
-            . "     where pa1.rut = $id "
-            . ") as pa3";
-    $res = $coneccion->query($cons);
-    $tmp = $res->fetch_array(MYSQLI_BOTH);
-    $niveles = count($tmp);
-    
-    $res = $coneccion->query($con2);
-    $tmp = $res->fetch_array(MYSQLI_BOTH);
-    $maxAsig = $tmp["maxAsigs"];*/
-    $sem1Query = "select nivel,codigoAsignatura,asigAprobadas from dbsac.planAntiguo where rut = 17019107 and nivel=1 order by codigoAsignatura asc";
-    $sem2Query = "select nivel,codigoAsignatura,asigAprobadas from dbsac.planAntiguo where rut = 17019107 and nivel=2 order by codigoAsignatura asc";
-    $sem3Query = "select nivel,codigoAsignatura,asigAprobadas from dbsac.planAntiguo where rut = 17019107 and nivel=3 order by codigoAsignatura asc";
-    $sem4Query = "select nivel,codigoAsignatura,asigAprobadas from dbsac.planAntiguo where rut = 17019107 and nivel=4 order by codigoAsignatura asc";
-    $sem5Query = "select nivel,codigoAsignatura,asigAprobadas from dbsac.planAntiguo where rut = 17019107 and nivel=5 order by codigoAsignatura asc";
-    $sem6Query = "select nivel,codigoAsignatura,asigAprobadas from dbsac.planAntiguo where rut = 17019107 and nivel=6 order by codigoAsignatura asc";
-    $sem7Query = "select nivel,codigoAsignatura,asigAprobadas from dbsac.planAntiguo where rut = 17019107 and nivel=7 order by codigoAsignatura asc";
-    $sem8Query = "select nivel,codigoAsignatura,asigAprobadas from dbsac.planAntiguo where rut = 17019107 and nivel=8 order by codigoAsignatura asc";
-    $sem9Query = "select nivel,codigoAsignatura,asigAprobadas from dbsac.planAntiguo where rut = 17019107 and nivel=9 order by codigoAsignatura asc";
-    $semAQuery = "select nivel,codigoAsignatura,asigAprobadas from dbsac.planAntiguo where rut = 17019107 and nivel=10 order by codigoAsignatura asc";
-    $semBQuery = "select nivel,codigoAsignatura,asigAprobadas from dbsac.planAntiguo where rut = 17019107 and nivel=11 order by codigoAsignatura asc";
-    $semCQuery = "select nivel,codigoAsignatura,asigAprobadas from dbsac.planAntiguo where rut = 17019107 and nivel=12 order by codigoAsignatura asc";
-    
-    $sem1Data = $coneccion->query($sem1Query);
-    $sem2Data = $coneccion->query($sem2Query);
-    $sem3Data = $coneccion->query($sem3Query);
-    $sem4Data = $coneccion->query($sem4Query);
-    $sem5Data = $coneccion->query($sem5Query);
-    $sem6Data = $coneccion->query($sem6Query);
-    $sem7Data = $coneccion->query($sem7Query);
-    $sem8Data = $coneccion->query($sem8Query);
-    $sem9Data = $coneccion->query($sem9Query);
-    $semAData = $coneccion->query($semAQuery);
-    $semBData = $coneccion->query($semBQuery);
-    $semCData = $coneccion->query($semCQuery);
-    
-    /*$arrSem1 = array();
-    $arrSem2 = array();
-    $arrSem3 = array();
-    $arrSem4 = array();
-    $arrSem5 = array();
-    $arrSem6 = array();
-    $arrSem7 = array();
-    $arrSem8 = array();
-    $arrSem9 = array();
-    $arrSemA = array();
-    $arrSemB = array();
-    $arrSemC = array();*/
-    
-    for($i = 0; $i < 12; $i++){
-        for($j = 0; $j < 3; $j++){
-            
-        }
-    }
-}
-
-function avancePlanAntiguo3($id){
     include('conection.php');
     echo "<table>";
     echo "<tr>";
@@ -239,17 +165,91 @@ function datosSemestre($id,$nivel){
             . "order by carrera asc, nivel asc, codigoAsignatura asc";
     $res = $coneccion->query($con);
     $salida = "<table>";
-        while($f = $res->fetch_array(MYSQLI_BOTH)){
-            #echo $f['nombreAsignatura'] . "<BR />" . $f['codigoAsignatura'];
-            if($f['asigAprobadas']==1){
-                $salida .= "<tr><td bgcolor=\"#00FF00\">" . $f['codigoAsignatura'] . "</td></tr>";
-            }else{
-                $salida .= "<tr><td>" . $f['codigoAsignatura'] . "</td></tr>";
-            }
+    while($f = $res->fetch_array(MYSQLI_BOTH)){
+        if($f['asigAprobadas']==1){
+            $salida .= "<tr><td bgcolor=\"#00FF00\">" . $f['codigoAsignatura'] . "</td></tr>";
+        }else{
+            $salida .= "<tr><td>" . $f['codigoAsignatura'] . "</td></tr>";
         }
+    }
     $salida .= "</table>";
     return $salida;
 }
+
+function avancePlanNuevo($id){
+    echo "<table>";
+    echo "<tr>";
+        echo "<th>Semetre 1</th>";
+        echo "<th>Semetre 2</th>";
+        echo "<th>Semetre 3</th>";
+        echo "<th>Semetre 4</th>";
+        echo "<th>Semetre 5</th>";
+        echo "<th>Semetre 6</th>";
+        echo "<th>Semetre 7</th>";
+        echo "<th>Semetre 8</th>";
+        echo "<th>Semetre 9</th>";
+        echo "<th>Semetre 10</th>";
+        echo "<th>Semetre 11</th>";
+        echo "<th>Semetre 12</th>";
+    echo "</tr>";
+    echo "<tr>";
+        echo "<td>" . datosSemestre2($id, 1) . "</td>";
+        echo "<td>" . datosSemestre2($id, 2) . "</td>";
+        echo "<td>" . datosSemestre2($id, 3) . "</td>";
+        echo "<td>" . datosSemestre2($id, 4) . "</td>";
+        echo "<td>" . datosSemestre2($id, 5) . "</td>";
+        echo "<td>" . datosSemestre2($id, 6) . "</td>";
+        echo "<td>" . datosSemestre2($id, 7) . "</td>";
+        echo "<td>" . datosSemestre2($id, 8) . "</td>";
+        echo "<td>" . datosSemestre2($id, 9) . "</td>";
+        echo "<td>" . datosSemestre2($id, 10) . "</td>";
+        echo "<td>" . datosSemestre2($id, 11) . "</td>";
+        echo "<td>" . datosSemestre2($id, 12) . "</td>";
+    echo "</tr>";
+    echo "</table>";
+}
+
+function datosSemestre2($id,$nivel){
+    include('conection.php');
+    $con = "select (select distinct carrera from dbsac.planantiguo pa where codigoPlan = plan) as carrera,nivel,descAsigRed,asigAprob from dbsac.planNuevo where rut=$id and nivel=$nivel";
+    $res = $coneccion->query($con);
+    $salida = "<table>";
+    while($f = $res->fetch_array(MYSQLI_BOTH)){
+        if($f['asigAprob']==1){
+            $salida .= "<tr><td bgcolor=\"#00FF00\">" . $f['descAsigRed'] . "</td></tr>";
+        }else{
+            $salida .= "<tr><td>" . $f['descAsigRed'] . "</td></tr>";
+        }
+    }
+    $salida .= "</table>";
+    return $salida;
+}
+
+function buscarNombre($patron){
+    include('conection.php');
+    $con = "select rut,concat(nombres,' ',apPaterno,' ',apMaterno) as nombre "
+            . "from dbsac.indicadores "
+            . "where nombres like '%$patron%' or apPaterno like '%$patron%' or apMaterno like '%$patron%'";
+    $res = $coneccion->query($con);
+    if($res->num_rows > 0){
+        echo "<table>"
+        . "<tr>"
+            . "<th>Rut</th>"
+            . "<th>Nombre</th>"
+        . "</tr>";
+        while($f = $res->fetch_array(MYSQLI_BOTH)){
+            echo "<tr><td>" . $f['rut'] . "</td><td>" . $f['nombre'] . "</td></tr>";
+        }
+        echo "</table>";
+        echo "Coincidencias: " . $res->num_row;
+    }else{
+        echo "No se encontraron resultados para: <b>$patron</b>"; 
+    }
+}
+
+
+
+
 
 
 

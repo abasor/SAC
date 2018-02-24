@@ -11,12 +11,10 @@ and open the template in the editor.
         <title></title>
     </head>
     <body>
-        <h1> hola jhanndy </h1>
         <?php
-        // put your code here
-        $rut = 17019107;
-        include('read.php');
-        $datos = getIndicadores($rut);
+            $rut = 17019107;
+            include('read.php');
+            $datos = getIndicadores($rut);
         ?>
         <div>
             <table border="1">
@@ -136,8 +134,14 @@ and open the template in the editor.
                 </tbody>
             </table>
             <br />
+            <h3>Plan antiguo</h3>
             <?php 
-                avancePlanAntiguo3($rut);
+                avancePlanAntiguo($rut);
+            ?>
+            <br />
+            <h3>Plan resideño</h3>
+            <?php
+                avancePlannuevo($rut);
             ?>
         </div>
     </body>
