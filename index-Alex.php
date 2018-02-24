@@ -137,7 +137,7 @@ and open the template in the editor.
             </table>
             <br />
             <?php 
-                avancePlanAntiguo($rut);
+                avancePlanAntiguo3($rut);
             ?>
         </div>
     </body>

@@ -197,7 +197,25 @@ function avancePlanAntiguo3($id){
     include('conection.php');
     echo "<table>";
     echo "<tr>";
-        echo "<td>" . datosSemestre($id, 1) . "</td>";
+        echo "<th>Semetre 1</th>";
+        echo "<th>Semetre 2</th>";
+        echo "<th>Semetre 3</th>";
+        echo "<th>Semetre 4</th>";
+        echo "<th>Semetre 5</th>";
+        echo "<th>Semetre 6</th>";
+        echo "<th>Semetre 7</th>";
+        echo "<th>Semetre 8</th>";
+        echo "<th>Semetre 9</th>";
+        echo "<th>Semetre 10</th>";
+        echo "<th>Semetre 11</th>";
+        echo "<th>Semetre 12</th>";
+    echo "</tr>";
+    echo "<tr>";
+        echo "<td>";
+        echo datosSemestre($id, 1);
+        echo "</td>";
+        
+        
         echo "<td>" . datosSemestre($id, 2) . "</td>";
         echo "<td>" . datosSemestre($id, 3) . "</td>";
         echo "<td>" . datosSemestre($id, 4) . "</td>";
@@ -220,13 +238,17 @@ function datosSemestre($id,$nivel){
             . "where rut=$id and nivel=$nivel "
             . "order by carrera asc, nivel asc, codigoAsignatura asc";
     $res = $coneccion->query($con);
-    echo "<table>";
-    echo "<tr><td>";
+    $salida = "<table>";
         while($f = $res->fetch_array(MYSQLI_BOTH)){
-            echo $f['nombreAsignatura'] . "<BR />" . $f['codigoAsignatura'];
+            #echo $f['nombreAsignatura'] . "<BR />" . $f['codigoAsignatura'];
+            if($f['asigAprobadas']==1){
+                $salida .= "<tr><td bgcolor=\"#00FF00\">" . $f['codigoAsignatura'] . "</td></tr>";
+            }else{
+                $salida .= "<tr><td>" . $f['codigoAsignatura'] . "</td></tr>";
+            }
         }
-    echo "</td></tr>";
-    echo "</table>";
+    $salida .= "</table>";
+    return $salida;
 }
 
 
