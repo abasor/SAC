@@ -17,15 +17,13 @@ and open the template in the editor.
             <br />
         </form>
         <?php
-            if ($_POST['buscador'])
-            { 
-                $patron = $_POST['palabra'];
-                #Si está vacío, lo informamos, sino r'ealizamos la búsqueda
-                if(empty($patron))
-                {
-                echo "No se ha ingresado una cadena a buscar";
-            }else{
-                buscarNombre($patron);
+            if ($_POST['buscador']){ 
+                $patron = $_POST['clave'];
+                if(empty($patron)){
+                    echo "No se ha ingresado una cadena a buscar";
+                }else{
+                    buscarNombre($patron);
+                }
             }
         ?>
     </body>

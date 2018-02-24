@@ -12,7 +12,8 @@ and open the template in the editor.
     </head>
     <body>
         <?php
-            $rut = 17019107;
+            $rut = $_GET['rut'];
+            #$rut = 17019107;
             include('read.php');
             $datos = getIndicadores($rut);
         ?>
