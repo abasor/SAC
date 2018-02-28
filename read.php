@@ -274,6 +274,19 @@ function buscarNombre($patron){
         echo "No se encontraron resultados para: <b>$patron</b>"; 
     }
 }
-
-
-
+        
+function validacion($id){
+    if(preg_match("/[0-9]/",$id)){
+        require 'conection.php';
+        $sql = "select count(*) as cant from indicadores where rut = $id";
+        $res = $coneccion->query($sql);
+        $valor = $res->fetch_assoc();
+        if($valor['cant']>0){
+            return 1;
+        }else{
+            return 0;
+        }
+    }else{
+        return 0;
+    }
+}

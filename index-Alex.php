@@ -16,6 +16,8 @@ and open the template in the editor.
             #$rut = 17019107;
             #$rut = 14684771;
             include('read.php');
+            //echo "validacion: " . validacion($rut);
+            if(validacion($rut)==1){
             $datos = getIndicadores($rut);
             if($datos["comision"]=='NO'){
         ?>
@@ -187,6 +189,8 @@ and open the template in the editor.
             ?>
         </div>
         <?php
+            }
+            
             }
         ?>
     </body>
