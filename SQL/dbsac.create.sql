@@ -19,9 +19,9 @@ CREATE SCHEMA IF NOT EXISTS `dbsac` DEFAULT CHARACTER SET utf8 ;
 USE `dbsac` ;
 
 -- -----------------------------------------------------
--- Table `mydb`.`Indicadores`
+-- Table `dbsac`.`Indicadores`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Indicadores` (
+CREATE TABLE IF NOT EXISTS `dbsac`.`Indicadores` (
   `rut` INT NOT NULL,
   `nombres` VARCHAR(100) NULL,
   `apPaterno` VARCHAR(45) NULL,
@@ -47,9 +47,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`PlanNuevo`
+-- Table `dbsac`.`PlanNuevo`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`PlanNuevo` (
+CREATE TABLE IF NOT EXISTS `dbsac`.`PlanNuevo` (
   `id` INT NOT NULL,
   `anyo` INT NULL,
   `rut` INT NULL,
@@ -65,9 +65,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`PlanAntiguo`
+-- Table `dbsac`.`PlanAntiguo`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`PlanAntiguo` (
+CREATE TABLE IF NOT EXISTS `dbsac`.`PlanAntiguo` (
   `id` INT NOT NULL,
   `anyoIngreso` INT NULL,
   `carrera` VARCHAR(150) NULL,

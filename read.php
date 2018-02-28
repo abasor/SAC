@@ -12,6 +12,7 @@ function getIndicadores($id){
     $consulta = "select nombres"
             . ",concat(apPaterno,' ',apMaterno) as apellidos"
             . ",carrera"
+            . ",anyoIngreso"
             . ",codigoPlan"
             . ",gratuidad"
             . ",(2018-anyoIngreso) as tiempoPlanActual"
@@ -27,6 +28,7 @@ function getIndicadores($id){
     $nombres = $fila->nombres;
     $apellidos = $fila->apellidos;
     $carrera = $fila->carrera;
+    $anyoIngreso = $fila->anyoIngreso;
     $plan = $fila->codigoPlan;
     $gratuidad = $fila->gratuidad;
     $tiempoPlanActual = $fila->tiempoPlanActual;
@@ -35,12 +37,13 @@ function getIndicadores($id){
     $utilizoCuarta = $fila->utilizoCuarta;
     $segSemCuarta = $fila->segSemCuarta;
     $condicion = $fila->condicion;
-    //              0           1       2       3       4           5               6       7       8           9               10
-    //return array($nombres, $apellidos, $carrera,$plan,$gratuidad,$tiempoPlanActual,$a1a6,$a7a12,$utilizoCuarta,$segSemCuarta,$condicion);
+    //              0           1       2       3       4           5          6       7              8       9            10       11           12
+    //return array($nombres, $apellidos, $carrera, $anyioIngreso ,$plan,$gratuidad,$tiempoPlanActual,$a1a6,$a7a12,$utilizoCuarta,$segSemCuarta,$condicion);
     return array(
         "nombres" => $nombres,
         "apellidos" => $apellidos,
         "carrera" => $carrera,
+        "anyoIngreso" => $anyoIngreso,
         "plan" => $plan,
         "gratuidad" => $gratuidad,
         "tiempoPlanActual" => $tiempoPlanActual,
@@ -164,12 +167,12 @@ function datosSemestre($id,$nivel){
             . "where rut=$id and nivel=$nivel "
             . "order by carrera asc, nivel asc, codigoAsignatura asc";
     $res = $coneccion->query($con);
-    $salida = "<table>";
+    $salida = "<table border='1'>";
     while($f = $res->fetch_array(MYSQLI_BOTH)){
         if($f['asigAprobadas']==1){
-            $salida .= "<tr><td bgcolor=\"#00FF00\">" . $f['codigoAsignatura'] . "</td></tr>";
+            $salida .= "<tr><td bgcolor=\"#7fb9db\" >" . $f['nombreAsignatura'] . "</td></tr>";
         }else{
-            $salida .= "<tr><td>" . $f['codigoAsignatura'] . "</td></tr>";
+            $salida .= "<tr><td>" . $f['nombreAsignatura'] . "</td></tr>";
         }
     }
     $salida .= "</table>";
@@ -213,12 +216,12 @@ function datosSemestre2($id,$nivel){
     include('conection.php');
     $con = "select (select distinct carrera from dbsac.planantiguo pa where codigoPlan = plan) as carrera,nivel,descAsigRed,asigAprob from dbsac.planNuevo where rut=$id and nivel=$nivel";
     $res = $coneccion->query($con);
-    $salida = "<table>";
+    $salida = "<table border=1>";
     while($f = $res->fetch_array(MYSQLI_BOTH)){
         if($f['asigAprob']==1){
-            $salida .= "<tr><td bgcolor=\"#00FF00\">" . $f['descAsigRed'] . "</td></tr>";
+            $salida .= "<tr><td bgcolor=\"#F7C370\">" . utf8_encode($f['descAsigRed']) . "</td></tr>";
         }else{
-            $salida .= "<tr><td>" . $f['descAsigRed'] . "</td></tr>";
+            $salida .= "<tr><td>" . utf8_encode($f['descAsigRed']) . "</td></tr>";
         }
     }
     $salida .= "</table>";
@@ -246,10 +249,6 @@ function buscarNombre($patron){
         echo "No se encontraron resultados para: <b>$patron</b>"; 
     }
 }
-
-
-
-
 
 
 
