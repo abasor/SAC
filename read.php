@@ -11,47 +11,72 @@ function getIndicadores($id){
     include('conection.php');
     $consulta = "select nombres"
             . ",concat(apPaterno,' ',apMaterno) as apellidos"
-            . ",carrera"
             . ",anyoIngreso"
             . ",codigoPlan"
-            . ",gratuidad"
-            . ",(2018-anyoIngreso) as tiempoPlanActual"
+            . ",carrera"
+            . ",clase"
             . ",a1a6"
             . ",a7a12"
+            . ",tiempoAnt"
+            . ",tiempoR"
+            . ",mencion"
+            . ",condicion"
+            . ",r1a6"
+            . ",r7a10"
             . ",utilizoCuarta"
             . ",segSemCuarta"
-            . ",condicion"
+            . ",doblePermanencia"
+            . ",gratuidad"
+            . ",claseTraslado"
+            . ",comision"
             . " from indicadores"
             . " where rut=$id";
+    //echo $consulta;
     $resultado = $coneccion->query($consulta);
     $fila = $resultado->fetch_object();
     $nombres = $fila->nombres;
     $apellidos = $fila->apellidos;
-    $carrera = $fila->carrera;
     $anyoIngreso = $fila->anyoIngreso;
     $plan = $fila->codigoPlan;
-    $gratuidad = $fila->gratuidad;
-    $tiempoPlanActual = $fila->tiempoPlanActual;
+    $carrera = $fila->carrera;
+    $clase = $fila->clase;
     $a1a6 = $fila->a1a6;
     $a7a12 = $fila->a7a12;
+    $tiempoPlanActual = $fila->tiempoAnt;
+    $tiempoPlanNuevo = $fila->tiempoR;
+    $mencion = $fila->mencion;
+    $condicion = $fila->condicion;
+    $r1a6 = $fila->r1a6;
+    $r7a10 = $fila->r7a10;
     $utilizoCuarta = $fila->utilizoCuarta;
     $segSemCuarta = $fila->segSemCuarta;
-    $condicion = $fila->condicion;
-    //              0           1       2       3       4           5          6       7              8       9            10       11           12
-    //return array($nombres, $apellidos, $carrera, $anyioIngreso ,$plan,$gratuidad,$tiempoPlanActual,$a1a6,$a7a12,$utilizoCuarta,$segSemCuarta,$condicion);
+    $doblePermanencia = $fila->doblePermanencia;
+    $gratuidad = $fila->gratuidad;
+    $claseTraslado = $fila->claseTraslado;
+    $comision = $fila->comision;
+    
     return array(
         "nombres" => $nombres,
         "apellidos" => $apellidos,
         "carrera" => $carrera,
         "anyoIngreso" => $anyoIngreso,
         "plan" => $plan,
-        "gratuidad" => $gratuidad,
-        "tiempoPlanActual" => $tiempoPlanActual,
+        "carrera" => $carrera,
+        "clase" => $clase,
         "a1a6" => $a1a6,
         "a7a12" => $a7a12,
+        "tiempoPlanActual" => $tiempoPlanActual, 
+        "tiempoPlanNuevo" => $tiempoPlanNuevo,
+        "mencion" => $mencion,
+        "condicion" => $condicion,
+        "r1a6" => $r1a6,
+        "r7a10" => $r7a10,
         "utilizoCuarta" => $utilizoCuarta,
         "segSemCuarta" => $segSemCuarta,
-        "condicion" => $condicion
+        "doblePermanencia" => $doblePermanencia,
+        "gratuidad" => $gratuidad,
+        "claseTraslado" => $claseTraslado,
+        "comision" => $comision
     );
 
 }

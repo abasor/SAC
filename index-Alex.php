@@ -61,7 +61,7 @@ and open the template in the editor.
                     </tr>
                     <tr>
                         <td>TIEMPO EN REDISEÑO</td>
-                        <td><?php echo cantSemPlanNuevo($rut)/5;?></td>
+                        <td><?php echo $datos["tiempoPlanNuevo"];?> años</td>
                     </tr>
                     <tr>
                         <td>ASIG 1 A 6 SEM PLAN ACTUAL</td>
@@ -80,6 +80,45 @@ and open the template in the editor.
                         <td><?php echo $datos["segSemCuarta"];?></td>
                     </tr>
                 </tbody>
+            </table>
+            <br />
+            <table border="1">
+                <tr>
+                    <td>Año de ingreso</td>
+                    <td><?php echo $datos["anyoIngreso"];?></td>
+                </tr>
+                <tr>
+                    <td>Clase</td>
+                    <td><?php echo $datos["clase"];?></td>
+                </tr>
+                <tr>
+                    <td>Mención</td>
+                    <td><?php echo $datos["mencion"];?></td>
+                </tr>
+                <tr>
+                    <td>Condición</td>
+                    <td><?php echo $datos["condicion"];?></td>
+                </tr>
+                <tr>
+                    <td>Asig 1 a 6 plan nuevo</td>
+                    <td><?php echo $datos["r1a6"];?></td>
+                </tr>
+                <tr>
+                    <td>Asig 7 a 10 plan nuevo</td>
+                    <td><?php echo $datos["r7a10"];?></td>
+                </tr>
+                <tr>
+                    <td>Doble permanencia</td>
+                    <td><?php echo $datos["doblePermanencia"];?></td>
+                </tr>
+                <tr>
+                    <td>Clase traslado</td>
+                    <td><?php echo $datos["claseTraslado"];?></td>
+                </tr>
+                <tr>
+                    <td>Comisión</td>
+                    <td><?php echo $datos["comision"];?></td>
+                </tr>
             </table>
             <br />
             <table border="1">

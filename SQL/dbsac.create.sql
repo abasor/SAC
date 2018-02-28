@@ -42,6 +42,8 @@ CREATE TABLE IF NOT EXISTS `dbsac`.`Indicadores` (
   `segSemCuarta` VARCHAR(45) NULL,
   `doblePermanencia` VARCHAR(45) NULL,
   `gratuidad` VARCHAR(45) NULL,
+  `claseTraslado` VARCHAR(10) NULL,
+  `comision` VARCHAR(10) NULL,
   PRIMARY KEY (`rut`))
 ENGINE = InnoDB;
 
