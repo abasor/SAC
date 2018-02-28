@@ -17,6 +17,7 @@ and open the template in the editor.
             #$rut = 14684771;
             include('read.php');
             $datos = getIndicadores($rut);
+            if($datos["comision"]=='NO'){
         ?>
         <div>
             <table border="1">
@@ -185,5 +186,8 @@ and open the template in the editor.
                 avancePlannuevo($rut);
             ?>
         </div>
+        <?php
+            }
+        ?>
     </body>
 </html>
